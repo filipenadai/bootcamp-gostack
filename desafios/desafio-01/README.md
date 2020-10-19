@@ -8,11 +8,11 @@ Nesse desafio eu planejei meus estudos, separando um tempo dedicado para o bootc
 
 O meu cronograma semanal de estudo:
 <p align="center">
-  <img width="80%" src="./assets/cronograma-semanal.png">
+  <img width="100%" src="./images/cronograma-semanal.png">
 </p>
 
 O meu cronograma mensal, irei adicionar conteúdo nele frequentemente conforme o avanço do bootcamp:
 
 <p align="center">
-  <img width="80%" src="./assets/cronograma-diario.png">
+  <img width="100%" src="./images/cronograma-diario.png">
 </p>
