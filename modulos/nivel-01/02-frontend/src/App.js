@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import api from './services/api';
 
 import Header from './components/Header';
 
@@ -6,16 +7,29 @@ import './App.css';
 
 function App() {
 
-    const [projects, setProjects] = useState(['Novo', 'Novo2']);
+    const [projects, setProjects] = useState([]);
 
-    function handleAddProject() {
-        setProjects([...projects, `novo ${Date.now()}`]);
+    useEffect(() => {
+        api.get('projects').then(response => {
+            setProjects(response.data);
+        })
+    }, []);
+
+    async function handleAddProject() {
+        const response = await api.post('projects', {
+            title: `novo ${Date.now()}`,
+            owner: 'Nadai'
+        });
+
+        const project = response.data;
+        
+        setProjects([...projects, project]);
     }
     return(
         <>
             <Header title="Home">
                 <ul>
-                    {projects.map(project => <h1>{project}</h1>)}
+                    {projects.map(project => <h1 key={project.id}>{project.title}</h1>)}
                 </ul>
                 <button type="button" onClick={handleAddProject}>Add</button>
             </Header>
