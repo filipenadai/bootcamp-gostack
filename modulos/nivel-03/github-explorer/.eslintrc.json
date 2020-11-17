@@ -25,6 +25,7 @@
     "prettier"
   ],
   "rules": {
+    "react/jsx-one-expression-per-line": "off",
     "no-use-before-define": "off",
     "prettier/prettier": "error",
     "react-hooks/rules-of-hooks": "error",
