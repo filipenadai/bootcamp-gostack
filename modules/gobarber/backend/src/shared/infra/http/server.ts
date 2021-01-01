@@ -12,10 +12,12 @@ import AppError from '@shared/errors/AppError';
 import '@shared/container';
 import '@shared/infra/typeorm';
 
+import rateLimiter from './middlewares/rateLimiter';
 import routes from './routes';
 
 const app = express();
 
+app.use(rateLimiter);
 app.use(cors());
 app.use(express.json());
 app.use('/files', express.static(uploadConfig.uploadsFolder));
