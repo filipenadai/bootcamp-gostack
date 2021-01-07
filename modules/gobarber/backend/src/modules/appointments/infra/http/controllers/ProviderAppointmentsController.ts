@@ -4,10 +4,10 @@ import { container } from 'tsyringe';
 
 import ListProviderAppointmentsService from '@modules/appointments/services/ListProviderAppointmentsService';
 
-export default class AppointmentsController {
+export default class ProviderAppointmentsController {
   public async index(request: Request, response: Response): Promise<Response> {
     const provider_id = request.user.id;
-    const { year, month, day } = request.body;
+    const { year, month, day } = request.query;
 
     const listProviderAppointment = container.resolve(
       ListProviderAppointmentsService,
@@ -15,9 +15,9 @@ export default class AppointmentsController {
 
     const appointments = await listProviderAppointment.execute({
       provider_id,
-      year,
-      month,
-      day,
+      day: Number(day),
+      month: Number(month),
+      year: Number(year),
     });
 
     return response.json(appointments);
