@@ -1,10 +1,21 @@
 import React from 'react';
-import { FiPower } from 'react-icons/fi';
+import { FiClock, FiPower } from 'react-icons/fi';
 
 import { useAuth } from '../../hooks/auth';
 import logoImg from '../../assets/logo.svg';
 
-import { Container, Header, HeaderContent, Profile } from './styles';
+import {
+  Container,
+  Header,
+  HeaderContent,
+  Profile,
+  Content,
+  Schedule,
+  Calendar,
+  NextAppointment,
+  Section,
+  Appointment,
+} from './styles';
 
 const Dashboard: React.FC = () => {
   const { signOut, user } = useAuth();
@@ -27,6 +38,70 @@ const Dashboard: React.FC = () => {
           </button>
         </HeaderContent>
       </Header>
+      <Content>
+        <Schedule>
+          <h1>Horários agendados</h1>
+          <p>
+            <span>Hoje</span>
+            <span>Dia 06</span>
+            <span>Segunda-feira</span>
+          </p>
+
+          <NextAppointment>
+            <strong>Atendimento a seguir</strong>
+            <div>
+              <img
+                src="https://avatars1.githubusercontent.com/u/48576140?s=460&u=c5d619abfa89d1da3f9ff6e1b3ba51f66607050b&v=4"
+                alt="Filipe Nadai"
+              />
+
+              <strong>Filipe Nadai</strong>
+              <span>
+                <FiClock />
+                09:00
+              </span>
+            </div>
+          </NextAppointment>
+
+          <Section>
+            <strong>Manhã</strong>
+
+            <Appointment>
+              <span>
+                <FiClock />
+                09:00
+              </span>
+              <div>
+                <img
+                  src="https://avatars1.githubusercontent.com/u/48576140?s=460&u=c5d619abfa89d1da3f9ff6e1b3ba51f66607050b&v=4"
+                  alt="Filipe Nadai"
+                />
+
+                <strong>Filipe Nadai</strong>
+              </div>
+            </Appointment>
+            <Appointment>
+              <span>
+                <FiClock />
+                09:00
+              </span>
+              <div>
+                <img
+                  src="https://avatars1.githubusercontent.com/u/48576140?s=460&u=c5d619abfa89d1da3f9ff6e1b3ba51f66607050b&v=4"
+                  alt="Filipe Nadai"
+                />
+
+                <strong>Filipe Nadai</strong>
+              </div>
+            </Appointment>
+          </Section>
+
+          <Section>
+            <strong>Tarde</strong>
+          </Section>
+        </Schedule>
+        <Calendar />
+      </Content>
     </Container>
   );
 };
