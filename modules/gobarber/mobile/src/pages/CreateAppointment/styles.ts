@@ -1,4 +1,5 @@
 import { FlatList } from 'react-native';
+import { RectButton } from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 import { Provider } from '.';
 
@@ -47,7 +48,7 @@ export const ProvidersListContainer = styled.View`
   height: 112px;
 `;
 
-export const ProviderContainer = styled.View<ProviderContainerProps>`
+export const ProviderContainer = styled(RectButton)<ProviderContainerProps>`
   background: ${props => (props.selected ? '#ff9000' : '#3e3b47')};
   flex-direction: row;
   align-items: center;
