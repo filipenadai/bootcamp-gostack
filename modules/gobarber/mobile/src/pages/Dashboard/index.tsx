@@ -31,13 +31,12 @@ export interface Provider {
 const Dashboard: React.FC = () => {
   const [providers, setProviders] = useState<Provider[]>([]);
 
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
   const { navigate } = useNavigation();
 
   const navigateToProfile = useCallback(() => {
-    // navigate('Profile');
-    signOut();
-  }, [signOut]);
+    navigate('Profile');
+  }, [navigate]);
 
   const navigateToCreateAppointment = useCallback(
     (providerId: string) => {
@@ -80,12 +79,12 @@ const Dashboard: React.FC = () => {
                 <ProviderName>{provider.name}</ProviderName>
 
                 <ProviderMeta>
-                  <Icon name="calendar" size={14} color="#ff900" />
+                  <Icon name="calendar" size={14} color="#ff9000" />
                   <ProviderMetaText>Segunda à sexta</ProviderMetaText>
                 </ProviderMeta>
 
                 <ProviderMeta>
-                  <Icon name="clock" size={14} color="#ff900" />
+                  <Icon name="clock" size={14} color="#ff9000" />
                   <ProviderMetaText>8h às 18h</ProviderMetaText>
                 </ProviderMeta>
               </ProviderInfo>
