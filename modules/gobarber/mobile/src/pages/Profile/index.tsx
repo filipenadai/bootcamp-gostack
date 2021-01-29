@@ -12,6 +12,7 @@ import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 import api from '../../services/api';
 
@@ -51,7 +52,37 @@ const Profile: React.FC = () => {
     navigation.goBack();
   }, [navigation]);
 
-  const handleSingUp = useCallback(
+  const handleUpdateAvatar = useCallback(() => {
+    launchImageLibrary(
+      {
+        mediaType: 'photo',
+      },
+      response => {
+        if (response.didCancel) {
+          return;
+        }
+
+        if (response.errorCode) {
+          Alert.alert('Erro ao selecionar a imagem');
+          return;
+        }
+
+        const data = new FormData();
+
+        data.append('avatar', {
+          type: 'image/jpeg',
+          uri: response.uri,
+          name: `${user.id + Date.now()}.jpg`,
+        });
+
+        api.patch('users/avatar', data).then(updateResponse => {
+          updateUser(updateResponse.data);
+        });
+      },
+    );
+  }, [updateUser, user.id]);
+
+  const handleUpdateProfile = useCallback(
     async (data: DataProfileForm) => {
       try {
         formRef.current?.setErrors({});
@@ -139,14 +170,18 @@ const Profile: React.FC = () => {
             <BackButton onPress={handleGoBack}>
               <Icon name="chevron-left" size={24} color="#999591" />
             </BackButton>
-            <UserAvatarButton onPress={() => {}}>
+            <UserAvatarButton onPress={handleUpdateAvatar}>
               <UserAvatar source={{ uri: user.avatar_url }} />
             </UserAvatarButton>
             <View>
               <Title>Crie sua conta</Title>
             </View>
 
-            <Form initialData={user} ref={formRef} onSubmit={handleSingUp}>
+            <Form
+              initialData={user}
+              ref={formRef}
+              onSubmit={handleUpdateProfile}
+            >
               <Input
                 autoCapitalize="words"
                 name="name"
